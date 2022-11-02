@@ -3,7 +3,17 @@ using TodoApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
+// Bypassing the http certificate
+HttpClientHandler clientHandler = new HttpClientHandler();
+clientHandler.ServerCertificateCustomValidationCallback = (sender, cert, chain, sslPolicyErrors) => { return true; };
+
+// Pass the handler to httpclient(from you are calling api)
+HttpClient client = new HttpClient(clientHandler);
+
+
 // Add services to the container.
+
 
 builder.Services.AddControllers();
 
@@ -18,9 +28,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseDeveloperExceptionPage();
-    // app.UseSwagger();
-    // app.UseSwaggerUI();
+	app.UseDeveloperExceptionPage();
+	// app.UseSwagger();
+	// app.UseSwaggerUI();
 }
 
 app.UseHttpsRedirection();
