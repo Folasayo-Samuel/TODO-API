@@ -1,0 +1,1 @@
+// WHAT IS A MODEL? A model is a set of classes that represent the data that the app manages
